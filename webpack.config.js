@@ -8,8 +8,8 @@ module.exports = {
         filename: 'bundle.js'
     },
     resolve: {
-        extensions: ['*', '.mjs', '.js', '.svelte'],
-        conditionNames: ['svelte', 'browser', 'import']
+        extensions: ['.*', '.mjs', '.js', '.svelte'],
+        conditionNames: ['svelte']
     },
     module: {
         rules: [
@@ -26,7 +26,18 @@ module.exports = {
                 use: {
                     loader: 'svelte-loader'
                 }
-            }
+            },
+            {
+                test: /\.(png|gif|jpg|jpeg)$/,
+                use: [
+                  {
+                    loader: 'file-loader',
+                    options: { 
+                      name: 'assets/[hash].[ext]' 
+                    },
+                  }
+                ],
+            },
         ]
     },
     plugins: [
